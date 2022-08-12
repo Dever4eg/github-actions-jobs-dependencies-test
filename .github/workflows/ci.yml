@@ -39,11 +39,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: hello-test
-          tags: user/app:latest
-
-      - name: Test
-        run: docker images
+          push: ${{ github.ref == 'refs/heads/master' }}
+          tags: hello-test
 
   deploy:
     runs-on: ubuntu-latest
