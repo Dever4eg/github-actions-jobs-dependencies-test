@@ -6,7 +6,10 @@ on:
       push:
         required: true
         type: boolean
-
+    outputs:
+      image:
+        description: "The docker image tag"
+        value: ${{ jobs.build.outputs.image }}
 jobs:
   build:
     runs-on: ubuntu-latest

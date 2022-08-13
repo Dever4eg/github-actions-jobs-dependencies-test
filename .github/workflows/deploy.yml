@@ -13,7 +13,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: [lint, test, build]
     environment: ${{ inputs.environment }}
     env:
         IMAGE: ${{ inputs.image }}

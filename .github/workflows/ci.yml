@@ -24,4 +24,5 @@ jobs:
     if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/deploy.yml
     with:
+      image: ${{ needs.build.outputs.image }}
       environment: test-production
