@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: ${{ github.ref == 'refs/heads/master' }}
+          push: ${{ inputs.push }}
           tags: hello-test
 
       - name: Output
