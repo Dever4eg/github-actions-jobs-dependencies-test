@@ -10,9 +10,12 @@ on:
       image:
         description: "The docker image tag"
         value: ${{ jobs.build.outputs.image }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.print.outputs.image }}
     steps:
       - name: Check-out repository
         uses: actions/checkout@v3
@@ -27,5 +30,6 @@ jobs:
           push: ${{ inputs.push }}
           tags: hello-test
 
-      - name: Output
+      - name: Print image
+        id: print
         run:  echo "::set-output name=image::hello-test"
