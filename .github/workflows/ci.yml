@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  test:
+    uses: ./.github/workflows/test.yml
+
+  build:
+    needs: [lint, test]
+    uses: ./.github/workflows/build.yml
+    with:
+      push: ${{ github.ref == 'refs/heads/master' }}
+
+  deploy:
+    needs: [lint, test, build]
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      image: ${{ needs.build.outputs.image }}
+      environment: test-production

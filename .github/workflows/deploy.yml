@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+        IMAGE: ${{ inputs.image }}
+    steps:
+      - name: Check-out repository
+        uses: actions/checkout@v3
+
+      - name: Deploy
+        run: echo "deploying image (${IMAGE})..."
