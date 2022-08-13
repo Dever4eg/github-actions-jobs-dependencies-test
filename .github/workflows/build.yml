@@ -30,6 +30,9 @@ jobs:
           push: ${{ inputs.push }}
           tags: hello-test
 
+      - name: List
+        run:  docker image ls --all
+
       - name: Print image
         id: print
         run:  echo "::set-output name=image::hello-test"
